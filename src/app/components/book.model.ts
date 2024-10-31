@@ -3,5 +3,5 @@ export interface Book{
     title: string;
     author: string;
     synopsis: string;
-    coverImage: string;
+    imageData: string;
 }

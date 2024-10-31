@@ -10,18 +10,17 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [HttpClientModule, RouterModule],
   templateUrl: './book-service.component.html',
-  styleUrl: './book-service.component.scss'
+  styleUrls: ['./book-service.component.scss'],
 })
-export class BookServiceComponent {
-
-}
+export class BookServiceComponent {}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BookService {
   private apiUrl = 'http://localhost:8080/api/book/findAll';
   private downloadUrl = 'http://localhost:8080/pdf';
+  private downloadImage = 'http://localhost:8080/image/findAll';
 
   constructor(private http: HttpClient) {}
 
@@ -34,6 +33,12 @@ export class BookService {
   }
 
   downloadBook(id: string): Observable<Blob> {
-    return this.http.get(`${this.downloadUrl}/download/${title}`, { responseType: 'blob' });
+    return this.http.get(`${this.downloadUrl}/download/${id}`, {
+      responseType: 'blob',
+    });
   }
+
+  getAllImages(): Observable<Book[]> {
+    return this.http.get<Book[]>(this.downloadImage);
+}
 }

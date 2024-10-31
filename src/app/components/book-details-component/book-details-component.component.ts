@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   imports: [HttpClientModule, RouterModule],
   templateUrl: './book-details-component.component.html',
-  styleUrl: './book-details-component.component.scss'
+  styleUrls: ['./book-details-component.component.scss']
 })
 export class BookDetailsComponentComponent {
   book: Book = {
@@ -18,8 +18,9 @@ export class BookDetailsComponentComponent {
     title: '',
     author: '',
     synopsis: '',
-    coverImage: ''
+    imageData: ''
   };
+  books: Book[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -39,5 +40,25 @@ export class BookDetailsComponentComponent {
     this.bookService.downloadBook(this.book.id).subscribe((blob) => {
       saveAs(blob, this.book.title + '.pdf');
     });
+  }
+
+  ngOnInit(): void {
+    this.loadImages();
+  }
+
+  loadImages() {
+    this.bookService.getAllImages().subscribe(books => {
+      this.books = books.map(book => ({
+        ...book,
+        coverImage: this.createImageFromBlob(book.imageData) // Converte Base64 para URL
+      }));
+    }, error => {
+      console.error('Erro ao carregar livros:', error);
+    });
+  }
+
+  createImageFromBlob(imageData: string): string {
+    // Monta o link completo para o Base64
+    return `data:${this.book.imageData};base64,${imageData}`;
   }
 }

@@ -1,8 +1,8 @@
 <div class="book-details">
-    <img [src]="book.coverImage" alt="{{ book.title }}" class="book-cover" />
+    <img [src]="book.imageData" alt="{{ book.title }}" class="book-cover" />
     <h2 class="book-title">{{ book.title }}</h2>
     <p class="book-author">Autor: {{ book.author }}</p>
-    <p class="book-description">{{ book.description }}</p>
-    <p class="book-price">Preço: {{ book.price }}</p>
+    <p class="book-description">{{ book.synopsis }}</p>
+    <p class="book-price">Preço: {{ book.imageData }}</p>
     <button class="download-btn" (click)="downloadBook()">Download</button>
   </div>
