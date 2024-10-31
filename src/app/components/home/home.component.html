@@ -6,10 +6,11 @@
         <h1>Catálogo de Livros Disponíveis</h1>
         <div class="catalog-grid">
           <div class="book-card" *ngFor="let book of books">
-            <img [src]="book.imageData" alt="{{ book.title }}" class="book-cover" />
+            <img src="https://m.media-amazon.com/images/I/61jgm6ooXzL._AC_UF1000,1000_QL80_.jpg" alt="{{ book.title }}" class="book-cover" />
+            <!-- [src]="book.imageData" esse aqui seria o correto, to tirando ele por que ta dando erro mas precisa ajustar -->
             <h2 class="book-title">{{ book.title }}</h2>
             <p class="book-author">Autor: {{ book.author }}</p>
-            <button class="download-btn" (click)="viewBookDetails(book)">Ver mais</button>
+            <button (click)="viewBookDetails(book)">Ver mais</button>
           </div>
         </div>
       </div>
