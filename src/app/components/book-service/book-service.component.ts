@@ -20,7 +20,7 @@ export class BookServiceComponent {
   providedIn: 'root'
 })
 export class BookService {
-  private apiUrl = 'http://localhost:8080/api/book';
+  private apiUrl = 'http://localhost:8080/api/book/findAll';
   private downloadUrl = 'http://localhost:8080/pdf';
 
   constructor(private http: HttpClient) {}
@@ -34,6 +34,6 @@ export class BookService {
   }
 
   downloadBook(id: string): Observable<Blob> {
-    return this.http.get(`${this.apiUrl}/download/${title}`, { responseType: 'blob' });
+    return this.http.get(`${this.downloadUrl}/download/${title}`, { responseType: 'blob' });
   }
 }
