@@ -1,20 +1,18 @@
 <app-header></app-header>
-
-<div class="catalog">
-  <h1>Nossos livros</h1>
-  <div class="catalog-grid">
-    <div class="catalog">
-      <h1>Catálogo de Livros Disponíveis</h1>
-      <div class="catalog-grid">
-        <div class="book-card" *ngFor="let book of books">
-          <img [src]="book.coverImage" alt="{{ book.title }}" class="book-cover" />
-          <h2 class="book-title">{{ book.title }}</h2>
-          <p class="book-author">Autor: {{ book.author }}</p>
-          <button class="download-btn">Baixar PDF</button>
+  <div class="catalog">
+    <h1>Nossos livros</h1>
+    <div class="catalog-grid">
+      <div class="catalog">
+        <h1>Catálogo de Livros Disponíveis</h1>
+        <div class="catalog-grid">
+          <div class="book-card" *ngFor="let book of books">
+            <img [src]="book.coverImage" alt="{{ book.title }}" class="book-cover" />
+            <h2 class="book-title">{{ book.title }}</h2>
+            <p class="book-author">Autor: {{ book.author }}</p>
+            <button class="download-btn" (click)="viewBookDetails(book)">Ver mais</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
 <app-footer></app-footer>
