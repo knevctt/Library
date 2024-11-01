@@ -6,11 +6,14 @@ import { Router, RouterModule } from '@angular/router';
 import { BookService } from '../book-service/book-service.component';
 import { Book } from '../book.model';
 import { HttpClientModule } from '@angular/common/http';
+import { AboutComponent } from '../about/about.component';
+import { PrivacyPolicyComponent } from "../privacy-policy/privacy-policy.component";
+import { TermsOfServiceComponent } from "../terms-of-service/terms-of-service.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, CommonModule, HttpClientModule, RouterModule],
+  imports: [HeaderComponent, FooterComponent, CommonModule, HttpClientModule, RouterModule, AboutComponent, PrivacyPolicyComponent, TermsOfServiceComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
