@@ -1,0 +1,23 @@
+/* privacy-policy.component.scss */
+#privacy-policy {
+    background-color: #f9f9fb;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      font-size: 2.2rem;
+      color: #333;
+      border-bottom: 2px solid #645DD7;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+  }
+  

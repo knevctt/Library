@@ -20,9 +20,11 @@ header {
       display: flex;
       margin: 0;
       padding: 0;
+      position: relative; // Necessário para o posicionamento da lista suspensa
 
       li {
         margin: 0 15px;
+        position: relative; // Para a lista de gêneros
 
         a {
           color: #ecf0f1;
@@ -33,6 +35,43 @@ header {
           &:hover {
             color: #3498db;
           }
+        }
+
+        // Lista de gêneros
+        .genre-list {
+          display: none; // Oculta a lista por padrão
+          position: absolute; // Posiciona a lista em relação ao item pai
+          top: 100%; // Aparece logo abaixo do item
+          left: 0;
+          background-color: white; // Cor de fundo da lista
+          border: 1px solid #ddd; // Borda da lista
+          border-radius: 4px; // Cantos arredondados
+          z-index: 1000; // Garante que a lista fique acima de outros elementos
+          padding: 10px 0; // Espaçamento interno
+        
+          li {
+            list-style: none; // Remove os marcadores da lista
+            padding: 8px 16px; // Espaçamento interno dos itens
+            cursor: pointer; // Muda o cursor para indicar que é clicável
+        
+            a {
+              color: #000000; // Cor do texto apenas para os links da lista de gêneros
+              text-decoration: none; // Remove o sublinhado
+        
+              &:hover {
+                color: #3498db; // Cor ao passar o mouse apenas para os links da lista de gêneros
+              }
+            }
+        
+            &:hover {
+              background-color: #f0f0f0; // Cor de fundo ao passar o mouse sobre o item da lista
+            }
+          }
+        }
+
+        // Exibe a lista ao passar o mouse sobre o item "Categorias"
+        &:hover .genre-list {
+          display: block; // Exibe a lista ao passar o mouse
         }
       }
     }
@@ -94,7 +133,6 @@ header {
   }
 }
 
-/* From Uiverse.io by ErzenXz */ 
 .input {
   width: 100%;
   max-width: 220px;
@@ -118,4 +156,100 @@ header {
 
 .input:focus {
   border: 2px solid grey;
+}
+
+/* From Uiverse.io by elisapi */ 
+.card {
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  gap: 20px;
+}
+
+/* for all social containers*/
+.socialContainer {
+  width: 52px;
+  height: 52px;
+  background-color: rgb(65, 29, 131);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition-duration: 0.3s;
+  border-radius: 30px;
+}
+/* instagram*/
+.containerOne:hover {
+  background-color: #d62976;
+  transition-duration: 0.3s;
+  transform: scale(1.2);
+}
+/* twitter*/
+.containerTwo:hover {
+  background-color: #00acee;
+  transition-duration: 0.3s;
+  transform: scale(1.2);
+}
+/* linkdin*/
+.containerThree:hover {
+  background-color: #0072b1;
+  transition-duration: 0.3s;
+  transform: scale(1.2);
+}
+/* Whatsapp*/
+.containerFour:hover {
+  background-color: #128c7e;
+  transition-duration: 0.3s;
+  transform: scale(1.2);
+}
+
+.socialContainer:active {
+  transform: scale(0.9);
+  transition-duration: 0.3s;
+}
+
+.socialSvg {
+  width: 17px;
+}
+
+.socialSvg path {
+  fill: rgb(255, 255, 255);
+}
+
+.socialContainer:hover .socialSvg {
+  animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.contact-card {
+  position: absolute; // Permite que o card seja posicionado em relação ao item pai
+  top: 15px; // Ajuste para posicionar acima do item "Contato"
+  left: 0;
+  background-color: white; // Cor de fundo
+  border: 1px solid #ddd; // Borda
+  border-radius: 4px; // Cantos arredondados
+  z-index: 1000; // Garante que fique acima de outros elementos
+  padding: 10px; // Espaçamento interno
+  display: none; // Oculta por padrão
+  width: max-content; // Ajusta a largura do card ao conteúdo
+}
+
+// Exibe o card ao passar o mouse sobre o item "Contato"
+.contact-item:hover .contact-card {
+  display: block; // Exibe o card ao passar o mouse
 }

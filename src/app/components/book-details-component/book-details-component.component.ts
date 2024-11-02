@@ -61,4 +61,6 @@ export class BookDetailsComponentComponent {
     // Monta o link completo para o Base64
     return `data:${this.book.imageData};base64,${imageData}`;
   }
+
+  
 }

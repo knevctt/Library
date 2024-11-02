@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
 import { AboutComponent } from '../about/about.component';
-import { Routes } from '@angular/router';
-
-const routes: Routes = [
-  {path: 'about', component: AboutComponent}
-]
+import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [AboutComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss'
 })
