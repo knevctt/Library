@@ -1,0 +1,97 @@
+/* Estilos Gerais */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f5f7fa; /* Fundo suave */
+}
+
+.upload-section {
+  text-align: center;
+  max-width: 800px; /* Define uma largura máxima para centralizar melhor */
+  margin: auto;
+  padding: 20px;
+}
+
+.info-text {
+  margin-bottom: 20px;
+}
+
+.info-text h2 {
+  color: #004aad; 
+  margin-bottom: 10px;
+}
+
+.info-text ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.info-text li {
+  text-align: center;
+  margin: 5px 0;
+  font-size: 15px;
+  color: #444;
+}
+
+.container {
+  max-width: 360px;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  gap: 15px;
+  background-color: #ffffff;
+}
+
+.header {
+  width: 100%;
+  border: 2px dashed #004aad;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.header svg {
+  height: 80px;
+  fill: #004aad;
+}
+
+.header p {
+  margin-top: 10px;
+  color: #333;
+  font-weight: bold;
+}
+
+.footer {
+  background-color: #e6f2ff;
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #004aad;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.footer svg {
+  height: 20px;
+  fill: #004aad;
+}
+
+#file {
+  display: none;
+}
