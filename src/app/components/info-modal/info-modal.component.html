@@ -1,0 +1,14 @@
+<!-- info-modal.component.html -->
+<div class="modal-backdrop" *ngIf="isVisible" (click)="closeModal()"></div>
+
+<div class="modal-container" *ngIf="isVisible">
+  <div class="modal-content">
+    <span class="close-button" (click)="closeModal()">&times;</span>
+    <h2>Mais Informações</h2>
+    <div *ngIf="book">
+      <h2 class="book-title">{{ book.title }}</h2>
+      <p class="book-author">Autor: {{ book.author }}</p>
+      <p class="book-synopsis">Sinopse: {{ book.synopsis }}</p>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
 import { AboutComponent } from './components/about/about.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -13,7 +14,8 @@ export const routes: Routes = [
     {path: 'termos', component: TermsOfServiceComponent},
     {path: 'about', component: AboutComponent},
     {path: 'politica', component: PrivacyPolicyComponent},
-    {path: 'login', component: LoginComponent}
+    {path: 'login', component: LoginComponent},
+    {path: 'cadastrar', component: RegisterComponent}
 ];
 
 @NgModule({

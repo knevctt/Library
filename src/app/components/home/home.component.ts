@@ -10,16 +10,19 @@ import { AboutComponent } from '../about/about.component';
 import { PrivacyPolicyComponent } from "../privacy-policy/privacy-policy.component";
 import { TermsOfServiceComponent } from "../terms-of-service/terms-of-service.component";
 import { UploadPdfComponent } from "../upload-pdf/upload-pdf.component";
+import { InfoModalComponent } from '../info-modal/info-modal.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, CommonModule, HttpClientModule, RouterModule, AboutComponent, PrivacyPolicyComponent, TermsOfServiceComponent, UploadPdfComponent],
+  imports: [HeaderComponent, FooterComponent, CommonModule, HttpClientModule, RouterModule, AboutComponent, PrivacyPolicyComponent, TermsOfServiceComponent, UploadPdfComponent, InfoModalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   books: Book[] = [];
+  showModal = false;
+  selectedBookId: number | null = null; // Propriedade para armazenar o ID do livro selecionado
 
   constructor(private bookService: BookService, private router: Router) {
     this.getBooks();
@@ -31,8 +34,14 @@ export class HomeComponent {
     });
   }
 
-  viewBookDetails(book: Book) {
-    this.router.navigate(['/book-details', book.id]);
+  openModal(book: Book) {
+    this.selectedBookId = Number(book.id); // Armazena o ID do livro selecionado
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.selectedBookId = null; // Limpa o ID ao fechar o modal
   }
 }
 

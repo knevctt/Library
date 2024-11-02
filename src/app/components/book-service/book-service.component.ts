@@ -21,6 +21,7 @@ export class BookService {
   private apiUrl = 'http://localhost:8080/api/book/findAll';
   private downloadUrl = 'http://localhost:8080/pdf';
   private downloadImage = 'http://localhost:8080/image/findAll';
+  private ById = 'http://localhost:8080/api/book';
 
   constructor(private http: HttpClient) {}
 
@@ -29,7 +30,7 @@ export class BookService {
   }
 
   getBookById(id: string): Observable<Book> {
-    return this.http.get<Book>(`${this.apiUrl}/findById/${id}`);
+    return this.http.get<Book>(`${this.ById}/findById/${id}`);
   }
 
   downloadBook(id: string): Observable<Blob> {

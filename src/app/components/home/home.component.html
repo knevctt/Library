@@ -11,11 +11,11 @@
               <h2 class="book-title">{{ book.title }}</h2>
               <p class="book-author">Autor: {{ book.author }}</p>
               <p class="book-author">Sinopse: {{ book.synopsis }}</p>
-              <button (click)="viewBookDetails(book)">Ver mais</button>
+              <button (click)="openModal(book)">Ver mais</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <app-info-modal [isVisible]="showModal"></app-info-modal>
   <app-footer></app-footer>
-
