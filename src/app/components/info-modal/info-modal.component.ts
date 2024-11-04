@@ -26,14 +26,33 @@ export class InfoModalComponent {
   }
 
   ngOnChanges() {
-    if (this.selectedBookId) {
-        this.getBookDetails(`${this.selectedBookId}`);
+    if (this.selectedBookId !== null) {
+        console.log('ID recebido em InfoModalComponent:', this.selectedBookId);
+        this.getBookDetails(this.selectedBookId);
     }
 }
 
-  getBookDetails(id: string) {
-    this.bookService.getBookById(id).subscribe(book => {
-      this.book = book;
-    });
+ngOnInit() {
+  if (this.selectedBookId !== null) {
+      console.log('ID recebido em InfoModalComponent via OnInit:', this.selectedBookId);
+      this.getBookDetails(this.selectedBookId);
   }
+}
+
+getBookDetails(id: number) {
+    this.bookService.getBookById(id).subscribe(book => {
+        this.book = book;
+
+        // Processar imagem
+        if (this.book.imageData) {
+            this.book.imageUrl = `data:image/jpeg;base64,${this.book.imageData}`;
+        }
+
+        // Processar PDF
+        if (this.book.pdfData) {
+            this.book.pdfUrl = `data:application/pdf;base64,${this.book.pdfData}`;
+        }
+    });
+}
+
 }

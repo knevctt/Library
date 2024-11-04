@@ -7,6 +7,7 @@ import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-
 import { AboutComponent } from './components/about/about.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { RegisterComponent } from './components/register/register.component';
+import { UploadPdfComponent } from './components/upload-pdf/upload-pdf.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -15,7 +16,8 @@ export const routes: Routes = [
     {path: 'about', component: AboutComponent},
     {path: 'politica', component: PrivacyPolicyComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'cadastrar', component: RegisterComponent}
+    {path: 'cadastrar', component: RegisterComponent},
+    {path: 'upload', component: UploadPdfComponent}
 ];
 
 @NgModule({

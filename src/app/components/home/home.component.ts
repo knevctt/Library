@@ -31,13 +31,14 @@ export class HomeComponent {
   getBooks() {
     this.bookService.getBooks().subscribe(books => {
       this.books = books;
+      console.log('Books recebidos:', this.books);
     });
   }
-
   openModal(book: Book) {
-    this.selectedBookId = Number(book.id); // Armazena o ID do livro selecionado
+    this.selectedBookId = Number(book.id); // Converte para `number`
+    console.log('ID do livro selecionado:', this.selectedBookId);
     this.showModal = true;
-  }
+}
 
   closeModal() {
     this.showModal = false;

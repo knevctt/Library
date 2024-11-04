@@ -95,7 +95,7 @@
               {
                 "glob": "**/*",
                 "input": "public",
-                "output": "assets/public"
+                "output": "assets"
               }
             ],
             "styles": [
