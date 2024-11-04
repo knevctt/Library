@@ -34,6 +34,8 @@ export class RegisterComponent {
       this.user.push(data);
       console.log(data);
 
+      alert("Cadastrado com sucesso");
+      
       this.novoUser = {
         name: "",
         lastName: "",
