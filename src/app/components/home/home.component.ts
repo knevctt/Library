@@ -31,7 +31,6 @@ export class HomeComponent {
   getBooks() {
     this.bookService.getBooks().subscribe(books => {
       this.books = books;
-      console.log('Books recebidos:', this.books);
     });
   }
   openModal(book: Book) {
