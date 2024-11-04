@@ -38,6 +38,8 @@ export class BookService {
     });
   
 }
-
+uploadBook(bookData: FormData): Observable<any> {
+  return this.http.post(`${this.ById}/upload`, bookData);
+}
 
 }

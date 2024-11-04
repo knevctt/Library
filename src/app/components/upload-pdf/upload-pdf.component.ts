@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HeaderComponent } from "../header/header.component";
 import { FooterComponent } from "../footer/footer.component";
 import { FormsModule } from '@angular/forms';
+import { BookService } from '../book-service/book-service.component';
 
 @Component({
   selector: 'app-upload-pdf',
@@ -20,7 +21,7 @@ export class UploadPdfComponent {
   selectedImage: File | null = null;
   selectedPdf: File | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private bookService: BookService) {}
 
   onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -49,11 +50,12 @@ export class UploadPdfComponent {
     formData.append('image', this.selectedImage);
     formData.append('pdf', this.selectedPdf);
 
-    this.http.post('http://localhost:8080/api/book/upload', formData)
-      .subscribe(response => {
-        console.log('Upload successful', response);
-      }, error => {
-        console.error('Upload error', error);
-      });
+    this.bookService.uploadBook(formData).subscribe(response => {
+      console.log('Upload bem-sucedido', response);
+      alert('Upload bem-sucedido! Seu livro foi adicionado com sucesso. 📚');
+    }, error => {
+      console.error('Erro no upload', error);
+      alert('Erro no upload. Tente novamente.');
+    });
   }
 }
