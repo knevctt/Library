@@ -4,11 +4,12 @@ import { HeaderComponent } from "../header/header.component";
 import { FooterComponent } from "../footer/footer.component";
 import { FormsModule } from '@angular/forms';
 import { BookService } from '../book-service/book-service.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-upload-pdf',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, FormsModule],
+  imports: [HeaderComponent, FooterComponent, FormsModule, CommonModule],
   templateUrl: './upload-pdf.component.html',
   styleUrls: ['./upload-pdf.component.scss']
 })
@@ -16,12 +17,15 @@ export class UploadPdfComponent {
   book = {
     title: '',
     author: '',
-    synopsis: ''
+    synopsis: '',
+    genero: ''
   };
   selectedImage: File | null = null;
   selectedPdf: File | null = null;
 
   constructor(private http: HttpClient, private bookService: BookService) {}
+
+  generos = ['FICCAO', 'NAO_FICCAO', 'FANTASIA', 'MISTERIO', 'ROMANCE', 'BIOGRAFIA'];
 
   onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -49,6 +53,7 @@ export class UploadPdfComponent {
     formData.append('synopsis', this.book.synopsis);
     formData.append('image', this.selectedImage);
     formData.append('pdf', this.selectedPdf);
+    formData.append('genero', this.book.genero);
 
     this.bookService.uploadBook(formData).subscribe(response => {
       console.log('Upload bem-sucedido', response);

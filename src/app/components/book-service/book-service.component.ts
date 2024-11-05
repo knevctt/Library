@@ -17,7 +17,6 @@ export class BookServiceComponent {}
 @Injectable({
   providedIn: 'root',
 })
-
 export class BookService {
   private apiUrl = 'http://localhost:8080/api/book/findAll';
   private ById = 'http://localhost:8080/api/book';
@@ -36,10 +35,19 @@ export class BookService {
     return this.http.get(`${this.apiUrl}`, {
       responseType: 'blob',
     });
-  
-}
-uploadBook(bookData: FormData): Observable<any> {
-  return this.http.post(`${this.ById}/upload`, bookData);
-}
+  }
+  uploadBook(bookData: FormData): Observable<any> {
+    return this.http.post(`${this.ById}/upload`, bookData);
+  }
 
+  getAllBooks(): Observable<any> {
+    return this.http.get(`${this.apiUrl}`);
+  }
+  getBooksByGenero(genero: string): Observable<any> {
+    return this.http.get(`${this.ById}/genre`, { params: { genero } });
+  }
+
+  searchBooks(query: string): Observable<any> {
+    return this.http.get(`${this.ById}/search`, { params: { query } });
+  }
 }

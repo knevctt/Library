@@ -26,6 +26,11 @@
     <label for="synopsis">Sinopse:</label>
     <textarea id="synopsis" [(ngModel)]="book.synopsis"></textarea>
 
+    <label for="genero">Gênero:</label>
+    <select id="genero" [(ngModel)]="book.genero">
+      <option *ngFor="let genero of generos" [value]="genero">{{genero}}</option>
+    </select>
+
     <label for="coverImage">Imagem da Capa:</label>
     <input id="coverImage" type="file" (change)="onImageSelected($event)">
     
