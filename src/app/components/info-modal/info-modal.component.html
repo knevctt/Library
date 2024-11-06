@@ -1,19 +1,29 @@
 <div class="modal-backdrop" *ngIf="isVisible" (click)="closeModal()"></div>
+
 <div class="modal-container" *ngIf="isVisible">
   <div class="modal-content">
     <span class="close-button" (click)="closeModal()">&times;</span>
+
     <div class="modal-header">
       <h2>Mais Informações</h2>
     </div>
+
     <div *ngIf="book" class="modal-body">
       <div class="modal-left">
         <img class="book-cover" [src]="book.imageUrl" alt="{{ book.title }}" />
       </div>
+
       <div class="modal-right">
         <h2 class="book-title">Titulo: {{ book.title }}</h2>
         <p class="book-author">Autor: {{ book.author }}</p>
-        <p class="book-synopsis">Sinopse: {{ book.synopsis }}</p>
-        <p class="book-synopsis">Genero: {{ book.genero }}</p>
+
+        <!-- Sinopse com rolagem caso o conteúdo seja muito longo -->
+        <div class="book-synopsis">
+          <p>Sinopse: {{ book.synopsis }}</p>
+        </div>
+
+        <p class="book-genre">Genero: {{ book.genero }}</p>
+
         <!-- Botão de Download -->
         <button (click)="downloadPdf()">Download PDF</button>
       </div>

@@ -18,7 +18,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   width: 80%;
-  max-width: 800px; // Aumenta a largura máxima para acomodar melhor o layout em colunas
+  max-width: 800px;
   z-index: 1001;
   animation: fadeIn 0.3s ease-out;
 }
@@ -45,14 +45,14 @@
 }
 
 .modal-left {
-  text-align: center; // Centralizar a imagem na coluna esquerda
+  text-align: center;
 }
 
 .book-cover {
   width: 100%;
   height: auto;
-  max-height: 400px; // Ajusta a altura máxima da imagem conforme necessário
-  object-fit: contain; // Mantém a proporção da imagem
+  max-height: 400px;
+  object-fit: contain;
   margin-bottom: 1rem;
 }
 
@@ -73,10 +73,20 @@
 }
 
 .book-author,
-.book-synopsis {
+.book-genre {
   font-size: 1rem;
   color: #666;
   margin-bottom: 1rem;
+}
+
+/* Estilos para a sinopse com limite de altura e rolagem */
+.book-synopsis {
+  font-size: 1rem;
+  color: #666;
+  max-height: 200px; /* Limita a altura da sinopse */
+  overflow-y: auto; /* Adiciona rolagem vertical se necessário */
+  margin-bottom: 1rem;
+  padding-right: 1rem; /* Adiciona um pouco de espaço para a rolagem */
 }
 
 button {
@@ -90,15 +100,15 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
 
-  &:hover {
-    background-color: #0056b3;
-  }
+button:hover {
+  background-color: #0056b3;
+}
 
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 @keyframes fadeIn {
