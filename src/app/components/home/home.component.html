@@ -6,7 +6,7 @@
       <h1>Catálogo de Livros Disponíveis</h1>
       <div class="catalog-grid">
         <div class="book-card" *ngFor="let book of books">
-          <img [src]="'data:image/jpeg;base64,' + book.imageData" alt="{{ book.title }}" />
+          <img [src]="getImageUrl(book.imageData)" alt="{{ book.title }}" />
           <!-- [src]="book.imageData" -->
           <h2 class="book-title">{{ book.title }}</h2>
           <p class="book-author">Autor: {{ book.author }}</p>

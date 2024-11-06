@@ -73,4 +73,8 @@ export class HomeComponent {
       this.books = data;
     });
   }
+
+  getImageUrl(imageData: { imageData: string; type: string }): string {
+    return `data:${imageData.type};base64,${imageData.imageData}`;
+  }
 }
