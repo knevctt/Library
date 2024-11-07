@@ -1,10 +1,11 @@
 // info-modal.component.ts
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookService } from '../../services/book-service.component';
 import { Book } from '../../models/book.model';
+import { LoginService } from '../../services/LoginService';
 
 @Component({
   standalone: true,
@@ -19,7 +20,12 @@ export class InfoModalComponent {
   book: Book | undefined; // Propriedade para armazenar os detalhes do livro
   isLoggedIn: boolean = false; // Variável para verificar se o usuário está logado
 
-  constructor(private bookService: BookService, private router: Router) {}
+  constructor(
+    private bookService: BookService,
+    private router: Router,
+    private loginService: LoginService,
+    private http: HttpClient
+  ) {}
 
   closeModal() {
     this.isVisible = false;
@@ -62,13 +68,26 @@ export class InfoModalComponent {
   }
 
   downloadPdf() {
-    if (this.isLoggedIn) {
-      if (this.book && this.book.pdfUrl) {
-        const link = document.createElement('a');
-        link.href = this.book.pdfUrl;
-        link.download = `${this.book.title}.pdf`;
-        link.click();
-      }
+    if (this.isLoggedIn && this.selectedBookId !== null) {
+      this.http
+        .get(
+          `http://localhost:8080/api/book/downloadPdf/${this.selectedBookId}`,
+          { responseType: 'blob' }
+        )
+        .subscribe(
+          (response: Blob) => {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(response);
+            link.download = `${this.book?.title}.pdf`;
+            document.body.appendChild(link); // Adicionar o link ao DOM
+            link.click();
+            document.body.removeChild(link); // Remover o link do DOM
+          },
+          (error) => {
+            console.error('Erro ao baixar o PDF', error);
+            alert('Erro ao baixar o PDF.');
+          }
+        );
     } else {
       alert('Você precisa estar logado para baixar o PDF.');
     }
@@ -77,6 +96,6 @@ export class InfoModalComponent {
   checkLoginStatus(): boolean {
     // Lógica de verificação de login (para futuro)
     // Retorna true se o usuário estiver logado, false caso contrário
-    return false; // Alterar conforme a implementação de login
+    return this.loginService.isLoggedIn();
   }
 }

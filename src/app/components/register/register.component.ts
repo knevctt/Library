@@ -25,8 +25,8 @@ export class RegisterComponent {
     lastName: "",
     userName: "",
     email: "",
-    password: ""
-
+    password: "",
+    accessLevel: 0
   }
   salvarCliente(): void{
 
@@ -41,7 +41,8 @@ export class RegisterComponent {
         lastName: "",
         userName: "",
         email: "",
-        password: ""
+        password: "",
+        accessLevel: 0
       }
     })
   }
