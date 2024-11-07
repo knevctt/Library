@@ -5,10 +5,17 @@
     <h2>Seção de Upload de Livros</h2>
     <p>Para garantir um upload bem-sucedido, siga as orientações abaixo:</p>
     <ul>
-      <li><strong>Formato:</strong> Apenas arquivos em formato PDF são aceitos.</li>
-      <li><strong>Tamanho Máximo:</strong> O arquivo deve ter no máximo 10 MB.</li>
+      <li>
+        <strong>Formato:</strong> Apenas arquivos em formato PDF são aceitos.
+      </li>
+      <li>
+        <strong>Tamanho Máximo:</strong> O arquivo deve ter no máximo 10 MB.
+      </li>
       <li><strong>Nome do Arquivo:</strong> Use um nome claro e descritivo.</li>
-      <li><strong>Conteúdo:</strong> Verifique se o PDF está legível e não infringe direitos autorais sem permissão.</li>
+      <li>
+        <strong>Conteúdo:</strong> Verifique se o PDF está legível e não
+        infringe direitos autorais sem permissão.
+      </li>
     </ul>
   </div>
 
@@ -16,21 +23,34 @@
     <div class="header">
       <p>Informações do Livro</p>
     </div>
-    
+
     <label for="title">Título:</label>
-    <input id="title" type="text" [(ngModel)]="book.title">
+    <input id="title" type="text" [(ngModel)]="book.title" />
 
     <label for="author">Autor:</label>
-    <input id="author" type="text" [(ngModel)]="book.author">
+    <input id="author" type="text" [(ngModel)]="book.author" />
 
     <label for="synopsis">Sinopse:</label>
     <textarea id="synopsis" [(ngModel)]="book.synopsis"></textarea>
 
+    <label for="generos">Gênero:</label>
+    <select id="generos" (change)="addGenero($event)">
+      <option value="" disabled selected>Selecione um gênero</option>
+      <option *ngFor="let genero of generosDisponiveis" [value]="genero">
+        {{ genero }}
+      </option>
+    </select>
+    <div class="selected-generos">
+      <span *ngFor="let genero of book.generos" class="genero-tag">
+        {{ genero }} <button (click)="removeGenero(genero)">x</button>
+      </span>
+    </div>
+
     <label for="coverImage">Imagem da Capa:</label>
-    <input id="coverImage" type="file" (change)="onImageSelected($event)">
-    
+    <input id="coverImage" type="file" (change)="onImageSelected($event)" />
+
     <label for="pdf">Arquivo PDF:</label>
-    <input id="pdf" type="file" (change)="onPdfSelected($event)">
+    <input id="pdf" type="file" (change)="onPdfSelected($event)" />
 
     <button (click)="uploadBook()">Upload</button>
   </div>

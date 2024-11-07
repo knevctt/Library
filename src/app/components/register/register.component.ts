@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FooterComponent } from "../footer/footer.component";
 import { HeaderComponent } from "../header/header.component";
 import { RegisterService } from '../../services/register.service';
-import { User } from '../../models/user';
+import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -25,8 +25,8 @@ export class RegisterComponent {
     lastName: "",
     userName: "",
     email: "",
-    password: ""
-
+    password: "",
+    accessLevel: 0
   }
   salvarCliente(): void{
 
@@ -41,7 +41,8 @@ export class RegisterComponent {
         lastName: "",
         userName: "",
         email: "",
-        password: ""
+        password: "",
+        accessLevel: 0
       }
     })
   }

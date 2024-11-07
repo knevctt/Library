@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BookServiceComponent } from './book-service.component';
+import { InitialPageComponent } from './initial-page.component';
 
-describe('BookServiceComponent', () => {
-  let component: BookServiceComponent;
-  let fixture: ComponentFixture<BookServiceComponent>;
+describe('InitialPageComponent', () => {
+  let component: InitialPageComponent;
+  let fixture: ComponentFixture<InitialPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BookServiceComponent]
+      imports: [InitialPageComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BookServiceComponent);
+    fixture = TestBed.createComponent(InitialPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

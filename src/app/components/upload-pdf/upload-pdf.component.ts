@@ -1,27 +1,42 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HeaderComponent } from "../header/header.component";
-import { FooterComponent } from "../footer/footer.component";
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 import { FormsModule } from '@angular/forms';
-import { BookService } from '../book-service/book-service.component';
+import { BookService } from '../../services/book-service.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-upload-pdf',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, FormsModule],
+  imports: [HeaderComponent, FooterComponent, FormsModule, CommonModule],
   templateUrl: './upload-pdf.component.html',
-  styleUrls: ['./upload-pdf.component.scss']
+  styleUrls: ['./upload-pdf.component.scss'],
 })
 export class UploadPdfComponent {
   book = {
     title: '',
     author: '',
-    synopsis: ''
+    synopsis: '',
+    generos: [] as string[]
   };
   selectedImage: File | null = null;
   selectedPdf: File | null = null;
 
   constructor(private http: HttpClient, private bookService: BookService) {}
+
+  generosDisponiveis = [
+    'FICCAO',
+    'AVENTURA',
+    'DRAMA',
+    'ROMANCE',
+    'FANTASIA',
+    'TERROR',
+    'BIOGRAFIA',
+    'TECNOLOGIA',
+    'HISTORIA',
+    'MISTERIO',
+  ];
 
   onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -49,13 +64,30 @@ export class UploadPdfComponent {
     formData.append('synopsis', this.book.synopsis);
     formData.append('image', this.selectedImage);
     formData.append('pdf', this.selectedPdf);
+    formData.append('generos', JSON.stringify(this.book.generos));
 
-    this.bookService.uploadBook(formData).subscribe(response => {
-      console.log('Upload bem-sucedido', response);
-      alert('Upload bem-sucedido! Seu livro foi adicionado com sucesso. 📚');
-    }, error => {
-      console.error('Erro no upload', error);
-      alert('Erro no upload. Tente novamente.');
-    });
+    this.bookService.uploadBook(formData).subscribe(
+      (response) => {
+        console.log('Upload bem-sucedido', response);
+        alert('Upload bem-sucedido! Seu livro foi adicionado com sucesso. 📚');
+      },
+      (error) => {
+        console.error('Erro no upload', error);
+        alert('Erro no upload. Tente novamente.');
+      }
+    );
+  }
+
+  addGenero(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const genero = selectElement.value;
+    if (genero && !this.book.generos.includes(genero)) {
+       this.book.generos.push(genero);
+       }
+    selectElement.value = ''; // Resetar o valor do seletor }
+  }
+  
+    removeGenero(genero: string): void {
+    this.book.generos = this.book.generos.filter((g) => g !== genero);
   }
 }
