@@ -1,17 +1,10 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Book } from '../book.model';
 import { title } from 'process';
 import { RouterModule } from '@angular/router';
+import { Book } from '../models/book.model';
 
-@Component({
-  selector: 'app-book-service',
-  standalone: true,
-  imports: [HttpClientModule, RouterModule],
-  templateUrl: './book-service.component.html',
-  styleUrls: ['./book-service.component.scss'],
-})
 export class BookServiceComponent {}
 
 @Injectable({

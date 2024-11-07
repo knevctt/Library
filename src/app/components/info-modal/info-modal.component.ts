@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { BookService } from '../book-service/book-service.component';
-import { Book } from '../book.model';
+import { BookService } from '../../services/book-service.component';
+import { Book } from '../../models/book.model';
 
 @Component({
   standalone: true,

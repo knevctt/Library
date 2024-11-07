@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { FormsModule } from '@angular/forms';
-import { BookService } from '../book-service/book-service.component';
+import { BookService } from '../../services/book-service.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
