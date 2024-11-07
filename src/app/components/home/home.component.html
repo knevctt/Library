@@ -11,7 +11,7 @@
           <h2 class="book-title">{{ book.title }}</h2>
           <p class="book-author">Autor: {{ book.author }}</p>
           <p class="book-author">Sinopse: {{ book.synopsis }}</p>
-          <p><strong>Gênero:</strong> {{ book.genero }}</p>
+          <p><strong>Gêneros:</strong> <span *ngFor="let genero of book.generos">{{ genero }}<span *ngIf="!isLastGenero(book.generos, genero)">, </span></span></p>
           <button (click)="openModal(book)">Ver mais</button>
         </div>
       </div>

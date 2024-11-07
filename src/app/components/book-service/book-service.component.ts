@@ -43,8 +43,8 @@ export class BookService {
   getAllBooks(): Observable<any> {
     return this.http.get(`${this.apiUrl}`);
   }
-  getBooksByGenero(genero: string): Observable<any> {
-    return this.http.get(`${this.ById}/genre`, { params: { genero } });
+  getBooksByGenero(genero: string): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.ById}/genero`, { params: { genero } });
   }
 
   searchBooks(query: string): Observable<any> {

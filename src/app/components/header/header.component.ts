@@ -25,6 +25,7 @@ export class HeaderComponent {
     'BIOGRAFIA',
     'TECNOLOGIA',
     'HISTORIA',
+    'MISTERIO'
   ];
 
   showGenreList = false;

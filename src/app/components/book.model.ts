@@ -3,7 +3,7 @@ export interface Book {
     title: string;
     author: string;
     synopsis: string;
-    genero: string;
+    generos: string[];
     imageDatas: string; // Base64 string
     pdfDatas: string; // Base64 string
     imageData: {

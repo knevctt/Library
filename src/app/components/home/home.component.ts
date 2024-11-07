@@ -77,4 +77,8 @@ export class HomeComponent {
   getImageUrl(imageData: { imageData: string; type: string }): string {
     return `data:${imageData.type};base64,${imageData.imageData}`;
   }
+
+  isLastGenero(generos: string[], genero: string): boolean {
+    return generos.indexOf(genero) === generos.length - 1;
+  }
 }
