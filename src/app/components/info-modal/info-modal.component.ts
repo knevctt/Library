@@ -40,7 +40,7 @@ export class InfoModalComponent {
   }
 
   ngOnInit() {
-    // Exemplo de verificação de login
+    // Verificação de login
     this.isLoggedIn = this.checkLoginStatus();
     if (this.selectedBookId !== null) {
       console.log(
@@ -94,8 +94,6 @@ export class InfoModalComponent {
   }
 
   checkLoginStatus(): boolean {
-    // Lógica de verificação de login (para futuro)
-    // Retorna true se o usuário estiver logado, false caso contrário
     return this.loginService.isLoggedIn();
   }
 }

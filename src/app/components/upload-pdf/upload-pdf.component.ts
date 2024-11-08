@@ -5,6 +5,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { BookService } from '../../services/book-service.component';
 import { CommonModule } from '@angular/common';
+import { LoginService } from '../../services/LoginService';
 
 @Component({
   selector: 'app-upload-pdf',
@@ -22,8 +23,9 @@ export class UploadPdfComponent {
   };
   selectedImage: File | null = null;
   selectedPdf: File | null = null;
+  isLoggedIn: boolean = false;
 
-  constructor(private http: HttpClient, private bookService: BookService) {}
+  constructor(private http: HttpClient, private bookService: BookService, private loginService: LoginService) {}
 
   generosDisponiveis = [
     'FICCAO',
@@ -37,6 +39,14 @@ export class UploadPdfComponent {
     'HISTORIA',
     'MISTERIO',
   ];
+
+  ngOnInit() {
+    this.isLoggedIn = this.checkLoginStatus();
+   }
+   
+  checkLoginStatus(): boolean {
+    return this.loginService.isLoggedIn();
+  }
 
   onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -53,6 +63,11 @@ export class UploadPdfComponent {
   }
 
   uploadBook(): void {
+    if (!this.isLoggedIn) {
+      alert('Você precisa estar logado para fazer o upload de um livro.');
+      return;
+    }
+
     if (!this.selectedImage || !this.selectedPdf) {
       alert('Por favor, selecione uma imagem e um PDF.');
       return;
@@ -68,11 +83,9 @@ export class UploadPdfComponent {
 
     this.bookService.uploadBook(formData).subscribe(
       (response) => {
-        console.log('Upload bem-sucedido', response);
-        alert('Upload bem-sucedido! Seu livro foi adicionado com sucesso. 📚');
+        alert('Upload bem-sucedido! O livro foi adicionado com sucesso. 📚');
       },
       (error) => {
-        console.error('Erro no upload', error);
         alert('Erro no upload. Tente novamente.');
       }
     );
