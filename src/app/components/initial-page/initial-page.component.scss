@@ -15,19 +15,20 @@
     display: flex;
     justify-content: space-around;
     padding: 20px;
+    flex-direction: column;
   }
   
   .feature {
     flex: 1;
     margin: 0 10px;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ccc;
     text-align: center;
   }
   
   .feature img {
     max-width: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
   }
   
   footer {
