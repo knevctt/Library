@@ -27,13 +27,13 @@
     <label for="title">Título:</label>
     <input id="title" type="text" [(ngModel)]="book.title" />
 
-    <label for="author">Autor:</label>
+    <label for="author">Autor(es):</label>
     <input id="author" type="text" [(ngModel)]="book.author" />
 
     <label for="synopsis">Sinopse:</label>
     <textarea id="synopsis" [(ngModel)]="book.synopsis"></textarea>
 
-    <label for="generos">Gênero:</label>
+    <label for="generos">Gênero(s):</label>
     <select id="generos" (change)="addGenero($event)">
       <option value="" disabled selected>Selecione um gênero</option>
       <option *ngFor="let genero of generosDisponiveis" [value]="genero">

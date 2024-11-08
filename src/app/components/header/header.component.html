@@ -46,6 +46,7 @@
         type="text"
         [(ngModel)]="searchQuery"
         class="input"
+        (keyup.enter)="searchBooks()"
       />
       <button (click)="searchBooks()">Buscar</button>
     </div>
