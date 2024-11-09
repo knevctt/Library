@@ -1,8 +1,14 @@
 <header></header>
 
 <div class="carousel">
-  <div class="carousel__control"></div>
-  <div class="carousel__stage">
+  <div #controls class="carousel__control">
+    <!-- Controles para navegar entre os itens, você pode adicionar links ou botões -->
+    <a href="#" data-index="0">Control 1</a>
+    <a href="#" data-index="1">Control 2</a>
+    <!-- Adicione mais controles conforme necessário -->
+  </div>
+
+  <div #stage class="carousel__stage">
     <div class="spinner spinner--left">
       <div class="spinner__face js-active" data-bg="#27323c">
         <div class="content" data-type="iceland">
@@ -18,7 +24,22 @@
           </div>
         </div>
       </div>
-      <!-- Add more faces for other countries here, as in the original code -->
+      <!-- Adicione mais faces para outros países aqui, conforme o código original -->
+      <div class="spinner__face" data-bg="#f0a500">
+        <div class="content" data-type="peru">
+          <div class="content__left">
+            <h1>PERU<br><span>SOUTH AMERICA</span></h1>
+          </div>
+          <div class="content__right">
+            <div class="content__main">
+              <p>“Peru is a country rich in history, culture, and mystery. From the ancient ruins of Machu Picchu to the vibrant streets of Lima, there's something for everyone. The food, the people, the landscapes — it's all unforgettable.”</p>
+              <p>– John Doe</p>
+            </div>
+            <h3 class="content__index">02</h3>
+          </div>
+        </div>
+      </div>
+      <!-- Adicione mais faces para outros países conforme necessário -->
     </div>
   </div>
 </div>

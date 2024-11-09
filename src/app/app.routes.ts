@@ -14,7 +14,7 @@ export const routes: Routes = [
     {path: '', component: InitialPageComponent},
     {path: 'home',component: HomeComponent},
     {path: 'livros',component: HomeComponent},
-    {path: 'start',component: StartComponent},
+    {path: 'initial',component: InitialPageComponent},
     {path: 'termos', component: TermsOfServiceComponent},
     {path: 'about', component: AboutComponent},
     {path: 'politica', component: PrivacyPolicyComponent},
