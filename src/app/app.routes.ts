@@ -1,4 +1,3 @@
-import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -13,6 +12,7 @@ import { InitialPageComponent } from './components/initial-page/initial-page.com
 export const routes: Routes = [
     {path: '', component: InitialPageComponent},
     {path: 'home',component: HomeComponent},
+    {path: 'livros',component: HomeComponent},
     {path: 'initial',component: InitialPageComponent},
     {path: 'termos', component: TermsOfServiceComponent},
     {path: 'about', component: AboutComponent},
@@ -20,12 +20,6 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'cadastrar', component: RegisterComponent},
     {path: 'upload', component: UploadPdfComponent}
+   
 ];
 
-@NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
-  })
-  export class AppRoutingModule {}
-
-  
