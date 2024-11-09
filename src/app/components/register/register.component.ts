@@ -18,15 +18,15 @@ export class RegisterComponent {
   constructor(private registerService: RegisterService){}
 
   user: User[] = [];
-     
+
   novoUser: User = {
 
     name: "",
     lastName: "",
     userName: "",
     email: "",
-    password: "",
-    accessLevel: 0
+    password: ""
+
   }
   salvarCliente(): void{
 
@@ -41,10 +41,9 @@ export class RegisterComponent {
         lastName: "",
         userName: "",
         email: "",
-        password: "",
-        accessLevel: 0
+        password: ""
       }
     })
   }
-  
+
 }
