@@ -12,7 +12,7 @@ import { StartComponent } from './components/start/start.component';
 
 export const routes: Routes = [
     {path: '', component: InitialPageComponent},
-    {path: 'home',component: HomeComponent},
+    {path: 'home',component: InitialPageComponent},
     {path: 'livros',component: HomeComponent},
     {path: 'initial',component: InitialPageComponent},
     {path: 'termos', component: TermsOfServiceComponent},
