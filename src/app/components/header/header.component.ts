@@ -52,4 +52,6 @@ export class HeaderComponent {
     console.log('Gênero selecionado:');
     this.generoSelected.emit(genero);
   }
+
+  
 }

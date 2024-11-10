@@ -1,54 +1,66 @@
 <header>
-  <nav class="navbar">
+  <nav class="navbar fixed-top d-flex align-items-center" style="background-color: #645DD7;">
+    <!-- Logo -->
     <div class="logo" routerLink="/initial">
       <h1>UniReader</h1>
     </div>
-    <ul class="nav-links">
-      <li><a routerLink="/home">Início</a></li>
-      <li><a routerLink="/livros">Livros</a></li>
-      <li (mouseenter)="toggleGenreList()" (mouseleave)="toggleGenreList()">
-        <a routerLink="#">Gênero</a>
-        <ul *ngIf="showGenreList" class="genre-list">
-          <li *ngFor="let genero of generos" (click)="filterByGenero(genero)">
-            <a href="#">{{ genero }}</a>
-          </li>
-        </ul>
-      </li>
-      <li><a routerLink="/login">Login</a></li>
-      <li><a routerLink="/upload">Carregar livro</a></li>
-      <li
-        class="contact-item"
-        (mouseenter)="showContactCard()"
-        (mouseleave)="hideContactCard()"
-      >
-        <a href="#" class="contact-link">Contato</a>
-        <div class="contact-card" *ngIf="isContactCardVisible">
-          <div class="card">
-            <a class="socialContainer containerOne" href="https://www.instagram.com/knevctt/">
-              <img src="assets/svg/instagram.svg" class="socialSvg instagramSvg" alt="Instagram SVG">
-            </a>
-            <a class="socialContainer containerTwo" href="https://x.com/knevctt">
-              <img src="assets/svg/twitter.svg" class="socialSvg twitterSvg" alt="Twitter/X SVG">
-            </a>
-            <a class="socialContainer containerThree" href="https://www.linkedin.com/in/knevctt/">
-              <img src="assets/svg/linkedin.svg" class="socialSvg linkdinSvg" alt="LinkedIn SVG">
-            </a>
-            <a class="socialContainer containerFour" href="https://wa.me/45999150427">
-              <img src="assets/svg/whatsapp.svg" class="socialSvg whatsappSvg" alt="WhatsApp SVG">
-            </a>
+
+    <!-- Container para centralizar os itens de navegação -->
+    <div class="flex-grow-1 d-flex justify-content-center">
+      <ul class="nav-links d-flex align-items-center">
+        <li><a routerLink="/home">Início</a></li>
+        <li><a routerLink="/livros">Livros</a></li>
+        <li (mouseenter)="toggleGenreList()" (mouseleave)="toggleGenreList()">
+          <a routerLink="#">Gênero</a>
+          <ul *ngIf="showGenreList" class="genre-list">
+            <li *ngFor="let genero of generos" (click)="filterByGenero(genero)">
+              <a href="#">{{ genero }}</a>
+            </li>
+          </ul>
+        </li>
+        <li><a routerLink="/login">Login</a></li>
+        <li><a routerLink="/upload">Carregar livro</a></li>
+        <li
+          class="contact-item"
+          (mouseenter)="showContactCard()"
+          (mouseleave)="hideContactCard()"
+        >
+          <a href="#" class="contact-link">Contato</a>
+          <div class="contact-card" *ngIf="isContactCardVisible">
+            <div class="card">
+              <a class="socialContainer containerOne" href="https://www.instagram.com/knevctt/">
+                <img src="assets/svg/instagram.svg" class="socialSvg instagramSvg" alt="Instagram SVG">
+              </a>
+              <a class="socialContainer containerTwo" href="https://x.com/knevctt">
+                <img src="assets/svg/twitter.svg" class="socialSvg twitterSvg" alt="Twitter/X SVG">
+              </a>
+              <a class="socialContainer containerThree" href="https://www.linkedin.com/in/knevctt/">
+                <img src="assets/svg/linkedin.svg" class="socialSvg linkdinSvg" alt="LinkedIn SVG">
+              </a>
+              <a class="socialContainer containerFour" href="https://wa.me/45999150427">
+                <img src="assets/svg/whatsapp.svg" class="socialSvg whatsappSvg" alt="WhatsApp SVG">
+              </a>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
-    <div class="search-bar">
-      <input
-        placeholder="Buscar livro..."
-        type="text"
-        [(ngModel)]="searchQuery"
-        class="input"
-        (keyup.enter)="searchBooks()"
-      />
-      <button (click)="searchBooks()">Buscar</button>
+        </li>
+      </ul>
     </div>
+
+    <!-- Barra de pesquisa à direita -->
+    <form class="d-flex input-group w-auto">
+      <input
+  type="text"
+  class="form-control rounded"
+  placeholder="Buscar livro..."
+  aria-label="Buscar livro"
+  [(ngModel)]="searchQuery"
+  [ngModelOptions]="{standalone: true}"
+  (keyup.enter)="searchBooks()"
+/>
+
+      <span class="input-group-text border-0" (click)="searchBooks()">
+        <i class="fas fa-search"></i>
+      </span>
+    </form>
   </nav>
 </header>
