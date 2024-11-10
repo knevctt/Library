@@ -4,7 +4,10 @@
   <div class="modal-content">
     <span class="close-button" (click)="closeModal()">&times;</span>
 
-    <div class="modal-header">
+    <div 
+    style="margin-left: 2%;
+    margin-top: 1%;
+    " class="modal-header">
       <h2>Mais Informações</h2>
     </div>
 
@@ -17,11 +20,11 @@
         <h2 class="book-title">Titulo: {{ book.title }}</h2>
         <p class="book-author">Autor: {{ book.author }}</p>
 
-        <!-- Sinopse com rolagem caso o conteúdo seja muito longo -->
         <div class="book-synopsis">
+         
           <p>Sinopse: {{ book.synopsis }}</p>
         </div>
-
+        <br>
         <p class="book-genre">Genero: {{ book.generos }}</p>
 
         <!-- Botão de Download -->

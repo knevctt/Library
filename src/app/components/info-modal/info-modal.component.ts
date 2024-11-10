@@ -20,6 +20,7 @@ export class InfoModalComponent {
   book: Book | undefined; // Propriedade para armazenar os detalhes do livro
   isLoggedIn: boolean = false; // Variável para verificar se o usuário está logado
 
+  
   constructor(
     private bookService: BookService,
     private router: Router,
@@ -30,6 +31,11 @@ export class InfoModalComponent {
   closeModal() {
     this.isVisible = false;
     this.book = undefined; // Limpar o livro ao fechar o modal
+  }
+  
+
+  openModal() {
+    this.isVisible = true;
   }
 
   ngOnChanges() {
