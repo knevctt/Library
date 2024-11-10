@@ -13,13 +13,13 @@
 
   .catalog-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);  // Isso cria 3 colunas de tamanho igual
+    grid-template-columns: repeat(4, 1fr);  // Isso cria 3 colunas de tamanho igual
     gap: 1rem;
     margin-top: 1rem;
   }
 
   .book-card {
-    width: 380px; // Reduz a largura do card
+    width: 330px; // Reduz a largura do card
     padding: 1rem;
     background-color: #fff;
     border-radius: 8px;

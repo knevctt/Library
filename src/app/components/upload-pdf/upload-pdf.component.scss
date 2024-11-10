@@ -1,16 +1,16 @@
 .upload-section {
   background: #f9f9f9;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 30px;
 }
 
 .info-text h2 {
   color: #333;
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 26px;
+  margin-bottom: 15px;
 }
 
 .info-text p {
@@ -31,8 +31,8 @@
 
 .container .header p {
   color: #333;
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 22px;
+  margin-bottom: 25px;
   text-align: center;
 }
 
@@ -40,77 +40,106 @@ label {
   color: #333;
   display: block;
   font-size: 16px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 input[type="text"],
 textarea,
-input[type="file"] {
+input[type="file"],
+select {
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
   display: block;
   font-size: 16px;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 12px;
   width: 100%;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  -webkit-appearance: none;  
+  -moz-appearance: none;     
+  appearance: none; 
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus,
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+select {
+  background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 6"><path fill="none" stroke="%23666" stroke-width="1" d="M1 1l3 3 3-3"/></svg>') no-repeat right 12px center;
+  background-size: 10px;
 }
 
 button {
-  background-color: #5cb85c;
+  background-color: #28a745;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   color: white;
   cursor: pointer;
   display: block;
   font-size: 16px;
   margin: 0 auto;
-  padding: 10px 20px;
+  padding: 12px 20px;
   text-align: center;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #4cae4c;
+  background-color: #218838;
 }
 
 button:active {
-  background-color: #419641;
+  background-color: #1e7e34;
 }
 
 .selected-generos {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
+  gap: 8px;
+}
 
-  .genero-tag {
-    display: flex;
-    align-items: center;
-    background-color: #007bff;
+.genero-tag {
+  display: flex;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  
+  &:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Pequeno aumento no tamanho ao passar o mouse */
+  }
+
+  button {
+    background: none;
+    border: none;
     color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    font-size: 14px;
+    margin-left: 8px;
+    cursor: pointer;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    outline: none;
+    padding: 0;
+    transition: color 0.3s ease;
+  }
 
-    button {
-      background: none;
-      border: none;
-      color: white;
-      margin-left: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      outline: none;
-    }
+  button:hover {
+    color: #ff6961;
+  }
 
-    button:hover {
-      color: #ff6961;
-    }
-
-    button:active {
-      color: #ff5c5c;
-    }
+  button:active {
+    color: #ff5c5c;
   }
 }
 
@@ -118,7 +147,6 @@ svg {
   height: 24px;
   width: 24px;
   vertical-align: middle;
-  margin-right: 5px;
 }
 
 #file-name {
