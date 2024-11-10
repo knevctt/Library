@@ -2,6 +2,7 @@
 <div class="catalog">
   <h1>Catálogo de livros</h1>
   <div class="catalog-grid">
+    
     <div class="catalog">
       <div class="catalog-grid">
         <div class="book-card" *ngFor="let book of books">
@@ -10,12 +11,16 @@
           <p class="book-author"> {{ book.author }}</p>
           <p><strong>Gêneros:</strong> <span *ngFor="let genero of book.generos">{{ genero }}<span *ngIf="!isLastGenero(book.generos, genero)">, </span></span></p>
           <button (click)="openModal(book)">Ver mais</button>
+
         </div>
       </div>
     </div>
   </div>
+   
 </div>
 <app-info-modal [isVisible]="showModal" [selectedBookId]="selectedBookId">
 </app-info-modal>
+
+
 
 <app-footer></app-footer>
