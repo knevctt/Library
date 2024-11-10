@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BookService } from '../../services/book-service.component';
 import { CommonModule } from '@angular/common';
 import { LoginService } from '../../services/LoginService';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-upload-pdf',
@@ -65,6 +66,7 @@ export class UploadPdfComponent {
   uploadBook(): void {
     if (!this.isLoggedIn) {
       alert('Você precisa estar logado para fazer o upload de um livro.');
+      redirectTo: LoginComponent;
       return;
     }
 
