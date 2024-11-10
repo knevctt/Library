@@ -13,20 +13,21 @@
 
   .catalog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);  // Isso cria 3 colunas de tamanho igual
+    gap: 1rem;
     margin-top: 1rem;
   }
 
   .book-card {
+    width: 380px; // Reduz a largura do card
+    padding: 1rem;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
     text-align: center;
     transition: transform 0.3s;
     overflow: hidden;
-
+  
     &:hover {
       transform: scale(1.05);
     }
@@ -37,18 +38,17 @@
       text-overflow: ellipsis; // Adiciona reticências se o texto for cortado
       display: -webkit-box; // Usado para suportar o truncamento em navegadores
       -webkit-box-orient: vertical; // Define a orientação da caixa
-      -webkit-line-clamp: 3; // Número de linhas a serem exibidas
   
       // Para suportar navegadores que não suportam -webkit-line-clamp
       // Use isso se o texto não estiver cortando corretamente em alguns navegadores
       white-space: normal; // Quebra o texto normalmente
     }
-
     img {
-      width: 100%; // Faz a imagem ocupar 100% da largura da div
-      height: auto; // Mantém a proporção da imagem
+      width: 100%; // Reduz a largura da imagem proporcionalmente ao card
+      height: 300px; // Diminui a altura da imagem
+      object-fit: cover;
       border-radius: 5px;
-      margin-bottom: 0.5rem; // Você pode ajustar isso conforme necessário
+      margin-bottom: 0.5rem;
     }
 
     .book-cover {
