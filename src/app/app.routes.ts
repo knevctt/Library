@@ -8,18 +8,22 @@ import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-poli
 import { RegisterComponent } from './components/register/register.component';
 import { UploadPdfComponent } from './components/upload-pdf/upload-pdf.component';
 import { InitialPageComponent } from './components/initial-page/initial-page.component';
+import { StartComponent } from './components/start/start.component';
 
 export const routes: Routes = [
     {path: '', component: InitialPageComponent},
-    {path: 'home',component: HomeComponent},
+    {path: 'home',component: InitialPageComponent},
     {path: 'livros',component: HomeComponent},
     {path: 'initial',component: InitialPageComponent},
+    {path: 'login', component: LoginComponent},
+    {path: 'cadastrar', component: RegisterComponent},
+    {path: 'upload', component: UploadPdfComponent},
+
     {path: 'termos', component: TermsOfServiceComponent},
     {path: 'about', component: AboutComponent},
     {path: 'politica', component: PrivacyPolicyComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'cadastrar', component: RegisterComponent},
-    {path: 'upload', component: UploadPdfComponent}
+    
+    
    
 ];
 
