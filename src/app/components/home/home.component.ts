@@ -33,7 +33,7 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
 export class HomeComponent {
   books: Book[] = [];
   showModal = false;
-  selectedBook: Book | undefined; // Armazena o livro selecionado
+  selectedBookId: number | null = null; // Propriedade para armazenar o ID do livro selecionado
 
   constructor(private bookService: BookService, private router: Router) {
     this.getBooks();
@@ -45,16 +45,20 @@ export class HomeComponent {
     });
   }
   openModal(book: Book) {
-    this.selectedBook = book;
-    this.showModal = true;
-    console.log('ID do livro selecionado:', this.selectedBook.id);
+    if (this.showModal && this.selectedBookId === book.id) {
+      // Se o modal já estiver aberto para o mesmo livro, fecha
+      this.closeModal();
+    } else {
+      // Caso contrário, abre o modal com o livro selecionado
+      this.selectedBookId = Number(book.id);
+      this.showModal = true;
+    }
   }
 
   closeModal() {
     this.showModal = false;
-    this.selectedBook = undefined; // Limpa o livro ao fechar o modal
+    this.selectedBookId = null; // Limpa o ID ao fechar o modal
   }
-
 
   loadAllBooks() {
     this.bookService.getAllBooks().subscribe((data) => {

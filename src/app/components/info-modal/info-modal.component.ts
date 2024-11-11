@@ -1,7 +1,7 @@
 // info-modal.component.ts
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookService } from '../../services/book-service.component';
 import { Book } from '../../models/book.model';
@@ -17,8 +17,7 @@ import { LoginService } from '../../services/LoginService';
 export class InfoModalComponent {
   @Input() isVisible: boolean = false;
   @Input() selectedBookId: number | null = null; // Propriedade para armazenar o ID do livro selecionado
-  @Input() book: Book | undefined; // Recebe o livro a ser exibido no modal
-  @Output() close = new EventEmitter<void>(); // Evento para informar ao componente pai
+  book: Book | undefined; // Propriedade para armazenar os detalhes do livro
   isLoggedIn: boolean = false; // Variável para verificar se o usuário está logado
 
   
@@ -31,8 +30,7 @@ export class InfoModalComponent {
 
   closeModal() {
     this.isVisible = false;
-    this.book = undefined;
-    this.close.emit(); // Emite o evento para informar que o modal foi fechado
+    this.book = undefined; // Limpar o livro ao fechar o modal
   }
   
 
