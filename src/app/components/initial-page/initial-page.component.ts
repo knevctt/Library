@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-initial-page',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent,HomeComponent,RouterModule],
+  imports: [HeaderComponent, FooterComponent, HomeComponent,RouterModule],
   templateUrl: './initial-page.component.html',
   styleUrl: './initial-page.component.scss'
 })
