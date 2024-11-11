@@ -14,7 +14,7 @@
           <a>Gênero</a>
           <ul *ngIf="showGenreList" class="genre-list">
             <li *ngFor="let genero of generos" (click)="filterByGenero(genero)">
-              <a href="#">{{ genero }}</a>
+              <a>{{ genero }}</a>
             </li>
           </ul>
         </li>
