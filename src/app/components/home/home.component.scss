@@ -46,7 +46,7 @@
     img {
       width: 100%; // Reduz a largura da imagem proporcionalmente ao card
       height: 300px; // Diminui a altura da imagem
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 5px;
       margin-bottom: 0.5rem;
     }
