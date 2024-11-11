@@ -11,7 +11,7 @@
         <li><a routerLink="/home">Início</a></li>
         <li><a routerLink="/livros">Livros</a></li>
         <li (mouseenter)="toggleGenreList()" (mouseleave)="toggleGenreList()">
-          <a routerLink="#">Gênero</a>
+          <a>Gênero</a>
           <ul *ngIf="showGenreList" class="genre-list">
             <li *ngFor="let genero of generos" (click)="filterByGenero(genero)">
               <a href="#">{{ genero }}</a>

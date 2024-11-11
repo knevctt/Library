@@ -49,7 +49,6 @@ export class HeaderComponent {
   }
 
   filterByGenero(genero: string) {
-    console.log('Gênero selecionado:');
     this.generoSelected.emit(genero);
   }
 
