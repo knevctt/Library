@@ -8,7 +8,6 @@ import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-poli
 import { RegisterComponent } from './components/register/register.component';
 import { UploadPdfComponent } from './components/upload-pdf/upload-pdf.component';
 import { InitialPageComponent } from './components/initial-page/initial-page.component';
-import { StartComponent } from './components/start/start.component';
 
 export const routes: Routes = [
     {path: '', component: InitialPageComponent},

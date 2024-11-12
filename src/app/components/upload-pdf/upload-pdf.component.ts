@@ -7,6 +7,8 @@ import { BookService } from '../../services/book-service.component';
 import { CommonModule } from '@angular/common';
 import { LoginService } from '../../services/LoginService';
 import { LoginComponent } from '../login/login.component';
+import Swal from 'sweetalert2';
+import 'animate.css';
 
 @Component({
   selector: 'app-upload-pdf',
@@ -65,13 +67,45 @@ export class UploadPdfComponent {
 
   uploadBook(): void {
     if (!this.isLoggedIn) {
-      alert('Você precisa estar logado para fazer o upload de um livro.');
+      Swal.fire({
+        title: "Você precisa estar logado para realizar o upload de um livro",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
       redirectTo: LoginComponent;
       return;
     }
 
     if (!this.selectedImage || !this.selectedPdf) {
-      alert('Por favor, selecione uma imagem e um PDF.');
+      Swal.fire({
+        title: "Por favor, selecione uma imagem e um PDF",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
       return;
     }
 

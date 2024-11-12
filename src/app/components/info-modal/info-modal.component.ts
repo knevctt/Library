@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { BookService } from '../../services/book-service.component';
 import { Book } from '../../models/book.model';
 import { LoginService } from '../../services/LoginService';
+import Swal from 'sweetalert2';
+import 'animate.css';
 
 @Component({
   standalone: true,
@@ -95,7 +97,23 @@ export class InfoModalComponent {
           }
         );
     } else {
-      alert('Você precisa estar logado para baixar o PDF.');
+      Swal.fire({
+        title: "Você precisa estar logado para baixar o pdf",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
     }
   }
 

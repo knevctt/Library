@@ -5,6 +5,8 @@ import { RegisterService } from '../../services/register.service';
 import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
+import 'animate.css';
 
 @Component({
   selector: 'app-register',
@@ -34,7 +36,23 @@ export class RegisterComponent {
       this.user.push(data);
       console.log(data);
 
-      alert("Cadastrado com sucesso");
+      Swal.fire({
+        title: "Cadastrado com sucesso",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
       
       this.novoUser = {
         name: "",
