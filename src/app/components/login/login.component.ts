@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { User } from '../../models/user.model';
 import { FooterComponent } from '../footer/footer.component';
@@ -6,30 +6,37 @@ import { HeaderComponent } from '../header/header.component';
 import { LoginService } from '../../services/LoginService';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Login } from '../../auth/login';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [FooterComponent, HeaderComponent, FormsModule, CommonModule, RouterModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  user: User = new User();
-  errorMessage: string = '';
+  login: Login = new Login(); // Garantindo que o login seja tipado corretamente
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  // Injeção das dependências
+  router = inject(Router);
+  loginService = inject(LoginService);
 
-  login() {
-    this.loginService.login(this.user).subscribe(
-      response => {
-        console.log('Login bem-sucedido', response);
-        this.router.navigate(['/home']);  // Redirecionar para a página inicial após login bem-sucedido
+  constructor() {}
+
+  logar() {
+    this.loginService.logar(this.login).subscribe({
+      next: (token: any) => {
+        if (token) { // O usuário e senha digitados estavam corretos
+          this.loginService.addToken(token);
+        } else { // Ou o usuário ou a senha estão incorretos
+          alert('usuário ou senha incorretos');
+        }
       },
-      error => {
-        console.error('Erro no login', error);
-        this.errorMessage = 'Credenciais inválidas. Por favor, tente novamente.';
+      error: () => {
+        alert('deu erro');
       }
-    );
+    });
   }
+  
 }
