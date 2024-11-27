@@ -1,9 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { User } from '../../models/user.model';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
-import { LoginService } from '../../services/LoginService';
+import { LoginService } from '../../auth/login.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Login } from '../../auth/login';

@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookService } from '../../services/book-service.component';
 import { Book } from '../../models/book.model';
-import { LoginService } from '../../services/LoginService';
+import { LoginService } from '../../auth/login.service';
 
 @Component({
   standalone: true,

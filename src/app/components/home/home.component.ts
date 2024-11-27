@@ -25,8 +25,8 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
     PrivacyPolicyComponent,
     TermsOfServiceComponent,
     UploadPdfComponent,
-    InfoModalComponent,
-  ],
+    InfoModalComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

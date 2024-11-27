@@ -9,16 +9,17 @@ import { Usuario } from './usuario';
   providedIn: 'root'
 })
 export class LoginService {
+  isLoggedIn(): boolean {
+    throw new Error('Method not implemented.');
+  }
 
   http = inject(HttpClient);
   API = "http://localhost:8080/api/login";
 
-
-  constructor() { }
-
+  constructor() {}
 
   logar(login: Login): Observable<string> {
-    return this.http.post<string>(this.API, login, {responseType: 'text' as 'json'});
+    return this.http.post<string>(this.API, login, { responseType: 'text' as 'json' });
   }
 
   addToken(token: string) {
@@ -49,5 +50,11 @@ export class LoginService {
       return false;
   }
 
+  findByUsername(username: string): Observable<Usuario> {
+    return this.http.get<Usuario>(this.API+"/findByUsername/"+username );
+  }
 
+  findById(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(this.API+"/findById/"+id );
+  }
 }
