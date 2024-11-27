@@ -1,23 +1,31 @@
 <app-header (generoSelected)="filterBooks($event)" (searchQueryChanged)="searchBooks($event)"></app-header>
 <div class="catalog">
   <h1>Catálogo de livros</h1>
-  <div class="catalog-grid">
-    
-    <div class="catalog">
-      <div class="catalog-grid">
-        <div class="book-card" *ngFor="let book of books">
-          <img [src]="getImageUrl(book.imageData)" alt="{{ book.title }}" />
-          <h2 class="book-title">{{ book.title }}</h2>
-          <p class="book-author"> {{ book.author }}</p>
-          <p><strong>Gêneros:</strong> <span *ngFor="let genero of book.generos">{{ genero }}<span *ngIf="!isLastGenero(book.generos, genero)">, </span></span></p>
-          <button (click)="openModal(book)">Ver mais</button>
+  <div class="catalog-container">
+    <!-- Sidebar com as checkboxes -->
+    <div class="sidebar">
+      <div class="checkbox-group">
+        
+        <H3>Categorias</H3>
+        <br>
+        <p>Aventura</p>
+        <p>Ação</p>
+      </div>
+    </div>
 
-        </div>
+    <!-- Área dos livros -->
+    <div class="catalog-grid">
+      <div class="book-card" *ngFor="let book of books">
+        <img [src]="getImageUrl(book.imageData)" alt="{{ book.title }}" />
+        <h2 class="book-title">{{ book.title }}</h2>
+        <p class="book-author">{{ book.author }}</p>
+        <button (click)="openModal(book)">Ver mais</button>
       </div>
     </div>
   </div>
-   
 </div>
+
+   
 <app-info-modal [isVisible]="showModal" [selectedBookId]="selectedBookId">
 </app-info-modal>
 
