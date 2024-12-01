@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
@@ -30,20 +30,27 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   books: Book[] = [];
   showModal = false;
   selectedBookId: number | null = null; // Propriedade para armazenar o ID do livro selecionado
+  page: number = 0;
+  size: number = 25; // Exibir 25 livros por página
+  totalPages: number = 0;
 
-  constructor(private bookService: BookService, private router: Router) {
+  constructor(private bookService: BookService, private router: Router) {}
+
+  ngOnInit(): void {
     this.getBooks();
   }
 
   getBooks() {
-    this.bookService.getBooks().subscribe((books) => {
-      this.books = books;
+    this.bookService.getBooks(this.page, this.size).subscribe((data) => {
+      this.books = data.content;
+      this.totalPages = data.totalPages;
     });
   }
+
   openModal(book: Book) {
     if (this.showModal && this.selectedBookId === book.id) {
       // Se o modal já estiver aberto para o mesmo livro, fecha
@@ -66,6 +73,7 @@ export class HomeComponent {
       this.books = data;
     });
   }
+
   filterBooks(genero: string) {
     this.bookService.getBooksByGenero(genero).subscribe((data) => {
       console.log('Livros filtrados:', data);
@@ -85,5 +93,28 @@ export class HomeComponent {
 
   isLastGenero(generos: string[], genero: string): boolean {
     return generos.indexOf(genero) === generos.length - 1;
+  }
+
+  previousPage(): void {
+    if (this.page > 0) {
+      this.page--;
+      this.getBooks();
+    }
+  }
+
+  nextPage(): void {
+    if (this.page < this.totalPages - 1) {
+      this.page++;
+      this.getBooks();
+    }
+  }
+
+  goToPage(page: number): void {
+    this.page = page;
+    this.getBooks();
+  }
+
+  getPaginationArray(): number[] {
+    return Array(this.totalPages).fill(0).map((_, i) => i);
   }
 }

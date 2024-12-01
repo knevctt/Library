@@ -7,15 +7,15 @@ import { Book } from '../models/book.model';
   providedIn: 'root',
 })
 export class BookService {
-  private apiUrl = 'http://localhost:8080/api/book/findAll';
+  private apiUrl = 'http://localhost:8080/api/book/paginated';
+  private findAllUrl = 'http://localhost:8080/api/book/findAll';
   private ById = 'http://localhost:8080/api/book';
 
   constructor(private http: HttpClient) {}
 
-  getBooks(): Observable<Book[]> {
+  getBooks(page: number, size: number): Observable<any> {
     const headers = this.getAuthHeaders();
-    console.log('Headers da requisição para getBooks:', headers); // Verifique se o cabeçalho `Authorization` está correto
-    return this.http.get<Book[]>(this.apiUrl, { headers: headers });
+    return this.http.get<any>(`${this.apiUrl}?page=${page}&size=${size}`, { headers });
   }
 
   getBookById(id: number): Observable<Book> {
@@ -42,9 +42,9 @@ export class BookService {
     return this.http.post(`${this.ById}/upload`, bookData, options);
   }
 
-  getAllBooks(): Observable<any> {
+  getAllBooks(): Observable<Book[]> {
     const headers = this.getAuthHeaders();
-    return this.http.get(this.apiUrl, { headers: headers });
+    return this.http.get<Book[]>(this.findAllUrl, { headers });
   }
 
   getBooksByGenero(genero: string): Observable<Book[]> {
@@ -57,7 +57,7 @@ export class BookService {
 
   searchBooks(query: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.get(`${this.ById}/search`, {
+    return this.http.get<any>(`${this.ById}/search`, {
       headers: headers,
       params: { query },
     });

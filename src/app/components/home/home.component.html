@@ -5,8 +5,7 @@
     <!-- Sidebar com as checkboxes -->
     <div class="sidebar">
       <div class="checkbox-group">
-        
-        <H3>Categorias</H3>
+        <h3>Categorias</h3>
         <br>
         <p>Aventura</p>
         <p>Ação</p>
@@ -25,10 +24,13 @@
   </div>
 </div>
 
-   
-<app-info-modal [isVisible]="showModal" [selectedBookId]="selectedBookId">
-</app-info-modal>
+<!-- Controles de Paginação -->
+<div class="pagination-controls">
+  <button (click)="previousPage()" [disabled]="page === 0">Anterior</button>
+  <button *ngFor="let p of getPaginationArray()" (click)="goToPage(p)" [disabled]="p === page">{{ p + 1 }}</button>
+  <button (click)="nextPage()" [disabled]="page >= totalPages - 1">Próximo</button>
+</div>
 
-
+<app-info-modal [isVisible]="showModal" [selectedBookId]="selectedBookId"></app-info-modal>
 
 <app-footer></app-footer>
