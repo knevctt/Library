@@ -1,6 +1,9 @@
-// info-modal.component.ts
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookService } from '../../services/book-service.component';
@@ -20,9 +23,7 @@ export class InfoModalComponent {
   @Input() isVisible: boolean = false;
   @Input() selectedBookId: number | null = null; // Propriedade para armazenar o ID do livro selecionado
   book: Book | undefined; // Propriedade para armazenar os detalhes do livro
-  isLoggedIn: boolean = false; // Variável para verificar se o usuário está logado
 
-  
   constructor(
     private bookService: BookService,
     private router: Router,
@@ -34,7 +35,6 @@ export class InfoModalComponent {
     this.isVisible = false;
     this.book = undefined; // Limpar o livro ao fechar o modal
   }
-  
 
   openModal() {
     this.isVisible = true;
@@ -43,18 +43,6 @@ export class InfoModalComponent {
   ngOnChanges() {
     if (this.selectedBookId !== null) {
       console.log('ID recebido em InfoModalComponent:', this.selectedBookId);
-      this.getBookDetails(this.selectedBookId);
-    }
-  }
-
-  ngOnInit() {
-    // Verificação de login
-    this.isLoggedIn = this.checkLoginStatus();
-    if (this.selectedBookId !== null) {
-      console.log(
-        'ID recebido em InfoModalComponent via OnInit:',
-        this.selectedBookId
-      );
       this.getBookDetails(this.selectedBookId);
     }
   }
@@ -75,12 +63,29 @@ export class InfoModalComponent {
     });
   }
 
+  private getAuthHeaders(): HttpHeaders {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const token = localStorage.getItem('token'); // Recupera o token usando a chave correta
+      console.log('Token recuperado do localStorage:', token); // Verifique o token recuperado
+      if (token) {
+        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      } else {
+        console.error('Token JWT não encontrado no localStorage');
+        return new HttpHeaders();
+      }
+    } else {
+      console.error('localStorage não está disponível no ambiente atual');
+      return new HttpHeaders();
+    }
+  }
+
   downloadPdf() {
-    if (this.isLoggedIn && this.selectedBookId !== null) {
+    if (this.selectedBookId !== null) {
+      const headers = this.getAuthHeaders();
       this.http
         .get(
           `http://localhost:8080/api/book/downloadPdf/${this.selectedBookId}`,
-          { responseType: 'blob' }
+          { responseType: 'blob', headers }
         )
         .subscribe(
           (response: Blob) => {
@@ -98,26 +103,22 @@ export class InfoModalComponent {
         );
     } else {
       Swal.fire({
-        title: "Você precisa estar logado para baixar o pdf",
+        title: 'Você precisa estar logado para baixar o PDF',
         showClass: {
           popup: `
-            animate__animated
-            animate__fadeInUp
-            animate__faster
-          `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `,
         },
         hideClass: {
           popup: `
-            animate__animated
-            animate__fadeOutDown
-            animate__faster
-          `
-        }
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `,
+        },
       });
     }
-  }
-
-  checkLoginStatus(): boolean {
-    return this.loginService.isLoggedIn();
   }
 }

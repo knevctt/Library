@@ -4,6 +4,7 @@ export interface IUser {
   userName: string;
   email: string;
   password: string;
+  role: string;
 }
 export class User implements IUser {
   name: string = '';
@@ -11,4 +12,5 @@ export class User implements IUser {
   userName: string = '';
   email: string = '';
   password: string = '';
+  role: string = '';
 }

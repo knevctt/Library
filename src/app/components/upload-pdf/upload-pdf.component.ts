@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { FormsModule } from '@angular/forms';
@@ -22,13 +22,16 @@ export class UploadPdfComponent {
     title: '',
     author: '',
     synopsis: '',
-    generos: [] as string[]
+    generos: [] as string[],
   };
   selectedImage: File | null = null;
   selectedPdf: File | null = null;
-  isLoggedIn: boolean = false;
 
-  constructor(private http: HttpClient, private bookService: BookService, private loginService: LoginService) {}
+  constructor(
+    private http: HttpClient,
+    private bookService: BookService,
+    private loginService: LoginService
+  ) {}
 
   generosDisponiveis = [
     'FICCAO',
@@ -42,14 +45,6 @@ export class UploadPdfComponent {
     'HISTORIA',
     'MISTERIO',
   ];
-
-  ngOnInit() {
-    this.isLoggedIn = this.checkLoginStatus();
-   }
-   
-  checkLoginStatus(): boolean {
-    return this.loginService.isLoggedIn();
-  }
 
   onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -66,7 +61,8 @@ export class UploadPdfComponent {
   }
 
   uploadBook(): void {
-    if (!this.isLoggedIn) {
+    const headers = this.getAuthHeaders();
+    if (!headers.get('Authorization')) {
       Swal.fire({
         title: "Você precisa estar logado para realizar o upload de um livro",
         showClass: {
@@ -84,7 +80,6 @@ export class UploadPdfComponent {
           `
         }
       });
-      redirectTo: LoginComponent;
       return;
     }
 
@@ -117,7 +112,7 @@ export class UploadPdfComponent {
     formData.append('pdf', this.selectedPdf);
     formData.append('generos', JSON.stringify(this.book.generos));
 
-    this.bookService.uploadBook(formData).subscribe(
+    this.bookService.uploadBook(formData, { headers }).subscribe(
       (response) => {
         alert('Upload bem-sucedido! O livro foi adicionado com sucesso. 📚');
       },
@@ -127,16 +122,32 @@ export class UploadPdfComponent {
     );
   }
 
+  private getAuthHeaders(): HttpHeaders {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const token = localStorage.getItem('token');  // Recupera o token usando a chave correta
+      console.log('Token recuperado do localStorage:', token);  // Verifique o token recuperado
+      if (token) {
+        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      } else {
+        console.error('Token JWT não encontrado no localStorage');
+        return new HttpHeaders();
+      }
+    } else {
+      console.error('localStorage não está disponível no ambiente atual');
+      return new HttpHeaders();
+    }
+  }
+
   addGenero(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const genero = selectElement.value;
     if (genero && !this.book.generos.includes(genero)) {
-       this.book.generos.push(genero);
-       }
-    selectElement.value = ''; // Resetar o valor do seletor }
+      this.book.generos.push(genero);
+    }
+    selectElement.value = ''; // Resetar o valor do seletor
   }
-  
-    removeGenero(genero: string): void {
+
+  removeGenero(genero: string): void {
     this.book.generos = this.book.generos.filter((g) => g !== genero);
   }
 }

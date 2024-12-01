@@ -1,11 +1,7 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { title } from 'process';
-import { RouterModule } from '@angular/router';
 import { Book } from '../models/book.model';
-
-export class BookServiceComponent {}
 
 @Injectable({
   providedIn: 'root',
@@ -17,31 +13,68 @@ export class BookService {
   constructor(private http: HttpClient) {}
 
   getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.apiUrl}`);
+    const headers = this.getAuthHeaders();
+    console.log('Headers da requisição para getBooks:', headers); // Verifique se o cabeçalho `Authorization` está correto
+    return this.http.get<Book[]>(this.apiUrl, { headers: headers });
   }
 
   getBookById(id: number): Observable<Book> {
-    return this.http.get<Book>(`${this.ById}/findById/${id}`);
+    const headers = this.getAuthHeaders();
+    return this.http.get<Book>(`${this.ById}/findById/${id}`, {
+      headers: headers,
+    });
   }
 
   downloadBook(id: string): Observable<Blob> {
-    return this.http.get(`${this.apiUrl}`, {
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.ById}/download/${id}`, {
+      headers,
       responseType: 'blob',
     });
   }
-  uploadBook(bookData: FormData): Observable<any> {
-    return this.http.post(`${this.ById}/upload`, bookData);
+
+  uploadBook(
+    bookData: FormData,
+    options?: {
+      headers: HttpHeaders;
+    }
+  ): Observable<any> {
+    return this.http.post(`${this.ById}/upload`, bookData, options);
   }
 
   getAllBooks(): Observable<any> {
-    return this.http.get(`${this.apiUrl}`);
+    const headers = this.getAuthHeaders();
+    return this.http.get(this.apiUrl, { headers: headers });
   }
+
   getBooksByGenero(genero: string): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.ById}/genero`, { params: { genero } });
+    const headers = this.getAuthHeaders();
+    return this.http.get<Book[]>(`${this.ById}/genero`, {
+      headers: headers,
+      params: { genero },
+    });
   }
 
   searchBooks(query: string): Observable<any> {
-    return this.http.get(`${this.ById}/search`, { params: { query } });
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.ById}/search`, {
+      headers: headers,
+      params: { query },
+    });
   }
 
+  private getAuthHeaders(): HttpHeaders {
+    if (typeof window !== 'undefined' && localStorage.getItem('token')) {
+      const token = localStorage.getItem('token'); // Recupera o token usando a chave correta
+      if (token) {
+        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      } else {
+        console.error('Token JWT não encontrado no localStorage');
+        return new HttpHeaders();
+      }
+    } else {
+      console.error('localStorage não está disponível');
+      return new HttpHeaders();
+    }
+  }
 }

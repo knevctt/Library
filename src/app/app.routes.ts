@@ -8,21 +8,18 @@ import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-poli
 import { RegisterComponent } from './components/register/register.component';
 import { UploadPdfComponent } from './components/upload-pdf/upload-pdf.component';
 import { InitialPageComponent } from './components/initial-page/initial-page.component';
+import { AuthGuard } from './AuthGuard';
 
 export const routes: Routes = [
-    {path: '', component: InitialPageComponent},
-    {path: 'home',component: InitialPageComponent},
-    {path: 'livros',component: HomeComponent},
-    {path: 'initial',component: InitialPageComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'cadastrar', component: RegisterComponent},
-    {path: 'upload', component: UploadPdfComponent},
-
-    {path: 'termos', component: TermsOfServiceComponent},
-    {path: 'about', component: AboutComponent},
-    {path: 'politica', component: PrivacyPolicyComponent},
-    
-    
-   
+  { path: '', component: InitialPageComponent },
+  { path: 'home', component: InitialPageComponent, canActivate: [AuthGuard] },
+  { path: 'livros', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'initial', component: InitialPageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'cadastrar', component: RegisterComponent },
+  { path: 'upload', component: UploadPdfComponent, canActivate: [AuthGuard] },
+  { path: 'termos', component: TermsOfServiceComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
+  { path: 'politica', component: PrivacyPolicyComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: 'login' }
 ];
-
