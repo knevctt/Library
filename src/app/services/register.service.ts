@@ -10,11 +10,11 @@ export class RegisterService {
   
   constructor(private http: HttpClient) { }
 
-  private apiUrl= "http://localhost:8080/api/user"
+  private apiUrl= "http://localhost:8080/novo-usuario/save"
 
   EnviaCadastro(user: User): Observable<any> {
     
-    return this.http.post(`${this.apiUrl}/save`, user, { responseType: 'text' });
+    return this.http.post(`${this.apiUrl}`, user, { responseType: 'text' });
   }
 }
 

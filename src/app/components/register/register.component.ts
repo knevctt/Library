@@ -22,20 +22,17 @@ export class RegisterComponent {
   user: User[] = [];
 
   novoUser: User = {
-
     name: "",
     lastName: "",
     userName: "",
     email: "",
     password: "",
-    role: ""
-
+    role: "user" // Definir padrão como "user"
   }
-  salvarCliente(): void{
 
-    this.registerService.EnviaCadastro(this.novoUser).subscribe((data)=>{
+  salvarCliente(): void {
+    this.registerService.EnviaCadastro(this.novoUser).subscribe((data) => {
       this.user.push(data);
-      console.log(data);
 
       Swal.fire({
         title: "Cadastrado com sucesso",
@@ -54,16 +51,34 @@ export class RegisterComponent {
           `
         }
       });
-      
+
       this.novoUser = {
         name: "",
         lastName: "",
         userName: "",
         email: "",
         password: "",
-        role: ""
+        role: "user" // Redefinir padrão após o cadastro
       }
-    })
+    }, (error) => {
+      console.error('Erro ao cadastrar', error);
+      Swal.fire({
+        title: "Erro ao cadastrar",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
+    });
   }
-
 }
