@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.compone
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
 import { UploadPdfComponent } from '../upload-pdf/upload-pdf.component';
 import { InfoModalComponent } from '../info-modal/info-modal.component';
+import { LoginService } from '../../services/LoginService';
 
 @Component({
   selector: 'app-home',
@@ -30,20 +31,27 @@ import { InfoModalComponent } from '../info-modal/info-modal.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   books: Book[] = [];
   showModal = false;
   selectedBookId: number | null = null; // Propriedade para armazenar o ID do livro selecionado
+  page: number = 0;
+  size: number = 10; // Exibir tantos livros por página
+  totalPages: number = 0;
 
-  constructor(private bookService: BookService, private router: Router) {
+  constructor(private bookService: BookService, private router: Router, private loginService: LoginService) {}
+
+  ngOnInit(): void {
     this.getBooks();
   }
 
   getBooks() {
-    this.bookService.getBooks().subscribe((books) => {
-      this.books = books;
+    this.bookService.getBooks(this.page, this.size).subscribe((data) => {
+      this.books = data.content;
+      this.totalPages = data.totalPages;
     });
   }
+
   openModal(book: Book) {
     if (this.showModal && this.selectedBookId === book.id) {
       // Se o modal já estiver aberto para o mesmo livro, fecha
@@ -66,7 +74,6 @@ export class HomeComponent {
       this.books = data;
     });
   }
-  
   filterBooks(genero: string) {
     this.bookService.getBooksByGenero(genero).subscribe({
       next: (data) => {
@@ -94,6 +101,4 @@ export class HomeComponent {
   isLastGenero(generos: string[], genero: string): boolean {
     return generos.indexOf(genero) === generos.length - 1;
   }
-
-  
 }
