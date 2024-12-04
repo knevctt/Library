@@ -13,7 +13,16 @@ export class BookService {
 
   constructor(private http: HttpClient) {}
 
-  getBooks(page: number, size: number): Observable<any> {
+
+  getBooksByGenero(genero: string): Observable<Book[]> {
+    const headers = this.getAuthHeaders(); // Autenticação
+    return this.http.get<Book[]>(`${this.ById}/genero`, {
+      headers: headers,
+      params: { genero },
+    });
+  }
+
+  getBooks(): Observable<Book[]> {
     const headers = this.getAuthHeaders();
     return this.http.get<any>(`${this.apiUrl}?page=${page}&size=${size}`, { headers });
   }
@@ -47,13 +56,6 @@ export class BookService {
     return this.http.get<Book[]>(this.findAllUrl, { headers });
   }
 
-  getBooksByGenero(genero: string): Observable<Book[]> {
-    const headers = this.getAuthHeaders();
-    return this.http.get<Book[]>(`${this.ById}/genero`, {
-      headers: headers,
-      params: { genero },
-    });
-  }
 
   searchBooks(query: string): Observable<any> {
     const headers = this.getAuthHeaders();
@@ -66,6 +68,7 @@ export class BookService {
   private getAuthHeaders(): HttpHeaders {
     if (typeof window !== 'undefined' && localStorage.getItem('token')) {
       const token = localStorage.getItem('token'); // Recupera o token usando a chave correta
+      console.log('Token JWT:', token);
       if (token) {
         return new HttpHeaders().set('Authorization', `Bearer ${token}`);
       } else {
@@ -77,4 +80,6 @@ export class BookService {
       return new HttpHeaders();
     }
   }
+
+ 
 }

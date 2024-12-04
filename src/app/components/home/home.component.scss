@@ -156,6 +156,17 @@
       transition: background 0s;
     }
   }
+
+  .clickable-text {
+    cursor: pointer; /* Faz o cursor mudar para a mãozinha */
+    color: #000000; /* Adiciona uma cor de destaque */
+    transition: color 0.3s;
+  
+    &:hover {
+      color: #3498db; /* Muda a cor ao passar o mouse */
+    }
+  }
+  
 }
 
 .pagination-controls {
