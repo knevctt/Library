@@ -11,6 +11,7 @@ import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.compone
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
 import { UploadPdfComponent } from '../upload-pdf/upload-pdf.component';
 import { InfoModalComponent } from '../info-modal/info-modal.component';
+import { LoginService } from '../../services/LoginService';
 
 @Component({
   selector: 'app-home',
@@ -35,10 +36,10 @@ export class HomeComponent implements OnInit {
   showModal = false;
   selectedBookId: number | null = null; // Propriedade para armazenar o ID do livro selecionado
   page: number = 0;
-  size: number = 25; // Exibir 25 livros por página
+  size: number = 10; // Exibir tantos livros por página
   totalPages: number = 0;
 
-  constructor(private bookService: BookService, private router: Router) {}
+  constructor(private bookService: BookService, private router: Router, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.getBooks();

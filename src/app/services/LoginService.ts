@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../models/user.model';
-import { jwtDecode, JwtPayload } from "jwt-decode";
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -16,15 +16,17 @@ export class LoginService {
   login(user: User): Observable<any> {
     return this.http.post<any>(this.apiUrl, user).pipe(
       tap((response) => {
-        console.log('Resposta do servidor: ', response);
-        if(response && response.token){
+        if (response && response.token) {
           localStorage.setItem('token', response.token);
-          console.log('Token armazenado no localStorage:', localStorage.getItem('token')); // Verifica o token armazenado
-        }else{
+        } else {
           console.error('Resposta do servidor não contém token.');
         }
       })
     );
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
   }
 
   getAuthHeaders() {
@@ -33,7 +35,7 @@ export class LoginService {
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
-  addToken(token: string){
+  addToken(token: string) {
     localStorage.setItem('token', token);
   }
 
@@ -50,14 +52,12 @@ export class LoginService {
     if (token) {
       return jwtDecode<JwtPayload>(token);
     }
-    return "";
+    return '';
   }
 
   hasPermission(role: string) {
     let user = this.jwtDecode() as User;
-    if (user.role == role)
-      return true;
-    else
-      return false;
+    if (user.role == role) return true;
+    else return false;
   }
 }

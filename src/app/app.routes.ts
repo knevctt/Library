@@ -18,8 +18,8 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'cadastrar', component: RegisterComponent },
   { path: 'upload', component: UploadPdfComponent, canActivate: [AuthGuard] },
-  { path: 'termos', component: TermsOfServiceComponent, canActivate: [AuthGuard] },
-  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
-  { path: 'politica', component: PrivacyPolicyComponent, canActivate: [AuthGuard] },
+  { path: 'termos', component: TermsOfServiceComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'politica', component: PrivacyPolicyComponent },
   { path: '**', redirectTo: 'login' }
 ];
