@@ -5,11 +5,13 @@
     <!-- Sidebar com as checkboxes -->
     <div class="sidebar">
       <div class="checkbox-group">
-        
-        <H3>Categorias</H3>
-        <br>
-        <p>Aventura</p>
-        <p>Ação</p>
+        <h3>Categorias</h3>
+        <BR>
+        <p (click)="filterBooks('AVENTURA')" class="clickable-text">Aventura</p>
+        <p (click)="filterBooks('Ação')" class="clickable-text">Ação</p>
+        <p (click)="filterBooks('Suspense')" class="clickable-text">Suspense</p>
+        <p (click)="filterBooks('Romance')" class="clickable-text">Romance</p>
+        <p (click)="filterBooks('Terror')" class="clickable-text">Terror</p>
       </div>
     </div>
 

@@ -66,12 +66,20 @@ export class HomeComponent {
       this.books = data;
     });
   }
+  
   filterBooks(genero: string) {
-    this.bookService.getBooksByGenero(genero).subscribe((data) => {
-      console.log('Livros filtrados:', data);
-      this.books = data;
+    this.bookService.getBooksByGenero(genero).subscribe({
+      next: (data) => {
+        console.log('Livros filtrados:', data); // Exibe os livros filtrados
+        this.books = data; // Atualiza os livros na tela
+      },
+      error: (err) => {
+        console.error('Erro ao filtrar livros por gênero:', err);
+      },
     });
   }
+  
+  
 
   searchBooks(query: string) {
     this.bookService.searchBooks(query).subscribe((data) => {
@@ -86,4 +94,6 @@ export class HomeComponent {
   isLastGenero(generos: string[], genero: string): boolean {
     return generos.indexOf(genero) === generos.length - 1;
   }
+
+  
 }
