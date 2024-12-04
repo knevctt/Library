@@ -76,26 +76,27 @@
         </li>
       </ul>
     </div>
-
+    <!-- Barra de pesquisa à direita -->
+    <form class="d-flex input-group w-auto">
+      <input
+      type="text"
+      class="form-control rounded"
+      placeholder="Buscar livro..."
+      aria-label="Buscar livro"
+      [(ngModel)]="searchQuery"
+      [ngModelOptions]="{ standalone: true }"
+      (keyup.enter)="searchBooks()"
+      />
+      
+      <span class="input-group-text border-0" (click)="searchBooks()"> </span>
+    </form>
+    
     <div class="logout-button">
        <button type="button" class="btn btn-primary" (click)="logout()">
          Sair 
        </button>
     </div>
-
-    <!-- Barra de pesquisa à direita -->
-    <form class="d-flex input-group w-auto">
-      <input
-        type="text"
-        class="form-control rounded"
-        placeholder="Buscar livro..."
-        aria-label="Buscar livro"
-        [(ngModel)]="searchQuery"
-        [ngModelOptions]="{ standalone: true }"
-        (keyup.enter)="searchBooks()"
-      />
-
-      <span class="input-group-text border-0" (click)="searchBooks()"> </span>
-    </form>
+  
   </nav>
-</header>
+  </header>
+  
