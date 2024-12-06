@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { Login } from '../models/login.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,11 @@ export class LoginService {
         }
       })
     );
+  }
+
+  logar(login: Login): Observable<string> {
+    const payload = login; // Gera o payload do model
+    return this.http.post<string>(this.apiUrl, payload, { responseType: 'text' as 'json' });
   }
 
   logout(): void {
@@ -61,3 +67,4 @@ export class LoginService {
     else return false;
   }
 }
+

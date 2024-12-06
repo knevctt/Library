@@ -13,7 +13,7 @@
         <img src="assets/images/login.webp" class="img-fluid" alt="Sample image" />
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form (ngSubmit)="login()">
+        <form (ngSubmit)="onLogin()">
           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
             <p class="lead fw-normal mb-0 me-3">Entre com</p>
             <button type="button" class="btn btn-primary btn-floating mx-1">
@@ -33,13 +33,13 @@
 
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <input type="userName" id="form3Example3" class="form-control form-control-lg" placeholder="Enter a valid email address" [(ngModel)]="user.userName" name="userName" required />
+            <input type="userName" id="form3Example3" class="form-control form-control-lg" placeholder="Enter a valid email address" [(ngModel)]="login.userName" name="userName" required />
             <label class="form-label" for="form3Example3">Endereço de e-mail</label>
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-3">
-            <input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Enter password" [(ngModel)]="user.password" name="password" required />
+            <input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Enter password" [(ngModel)]="login.password" name="password" required />
             <label class="form-label" for="form3Example4">Senha</label>
           </div>
 

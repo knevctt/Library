@@ -6,6 +6,7 @@ import { HeaderComponent } from '../header/header.component';
 import { LoginService } from '../../services/LoginService';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Login } from '../../models/login.model';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  user: User = new User();
+  login: Login = new Login(); // Instância do model
   errorMessage: string = '';
 
   loginService = inject(LoginService);
@@ -23,18 +24,16 @@ export class LoginComponent {
 
   constructor() {}
 
-  login() {
-    this.loginService.login(this.user).subscribe(
-    (response) => {
-      localStorage.setItem('token', response.token); // Armazene o token no localStorage
-      this.router.navigate(['/home']); // Redirecionar para a página inicial após login bem-sucedido
-    },
-    (error) => {
-      console.error('Erro no login', error);
-      this.errorMessage =
-        'Credenciais inválidas. Por favor, tente novamente.';
-    }
-
+  onLogin() {
+    this.loginService.logar(this.login).subscribe(
+      (response) => {
+        this.loginService.addToken(response); // Salva o token no localStorage
+        this.router.navigate(['/home']); // Redireciona após login bem-sucedido
+      },
+      (error) => {
+        console.error('Erro no login:', error);
+        this.errorMessage = 'Credenciais inválidas. Por favor, tente novamente.';
+      }
     );
   }
 }
